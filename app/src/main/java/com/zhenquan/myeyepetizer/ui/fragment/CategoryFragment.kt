@@ -11,7 +11,7 @@ import com.zhenquan.myeyepetizer.ui.base.tabsId
 /**
  * Created by zhenquan on 2017/9/8.
  */
-class CategoryFragment : BaseFragment(tabId = tabsId[0]) {
+class CategoryFragment : BaseFragment(tabId = tabsId[1]) {
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
