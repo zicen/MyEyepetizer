@@ -1,5 +1,4 @@
-package com.xk.eyepetizer
-
+package com.zhenquan.myeyepetizer
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -14,9 +13,7 @@ import java.io.Serializable
 import java.util.*
 
 
-/**
- * Created by xuekai on 2017/8/20.
- */
+
 const val TAG = "Eyepetizer"
 
 
@@ -59,7 +56,7 @@ fun <T> Observable<T>.io_main(): Observable<T> {
 }
 
 
-fun View.durationFormat(duration: Long?): String {
+fun durationFormat(duration: Long?): String {
     val minute = duration!! / 60
     val second = duration % 60
     if (minute <= 9) {
@@ -77,7 +74,7 @@ fun View.durationFormat(duration: Long?): String {
     }
 }
 
-fun View.timeFormat(time: Long): String {
+fun timeFormat(time: Long): String {
     val date = Date(time)
     val timeCalendar = Calendar.getInstance()
     timeCalendar.time = date
@@ -106,7 +103,7 @@ fun View.timeFormat(time: Long): String {
 /**
  * 几天前  几小时前
  */
-fun View.timePreFormat(time: Long): String {
+fun timePreFormat(time: Long): String {
 
     val now =System.currentTimeMillis()
     val pre = now - time//多久前

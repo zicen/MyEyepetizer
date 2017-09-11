@@ -8,10 +8,10 @@ import android.widget.FrameLayout
 import com.bumptech.glide.Glide
 import com.shuyu.gsyvideoplayer.utils.GSYVideoType
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer
-import com.xk.eyepetizer.TAG
 import com.xk.eyepetizer.mvp.model.bean.Item
 import com.xk.eyepetizer.player.EmptyControlVideo
 import com.zhenquan.myeyepetizer.R
+import com.zhenquan.myeyepetizer.TAG
 import kotlinx.android.synthetic.main.item_home_banner.view.*
 
 

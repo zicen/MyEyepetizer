@@ -8,8 +8,8 @@ import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
-import com.xk.eyepetizer.io_main
 import com.xk.eyepetizer.util.DisplayManager
+import com.zhenquan.myeyepetizer.io_main
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
