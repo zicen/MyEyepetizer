@@ -16,17 +16,28 @@ import com.zhenquan.myeyepetizer.durationFormat
 /**
  * Created by zhenquan on 2017/9/11.
  */
-class HomeItemAdapter(val context: Context, var itemList: ArrayList<Item>) : RecyclerView.Adapter<HomeItemAdapter.HomeViewHolder>() {
+class HomeItemAdapter(val context: Context, var itemList: ArrayList<Item>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+        /* if (position<=5) {
+             holder as HomeHeadViewHolder
+             holder?.slider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom)
+             holder?.slider.setDuration(5000)
+             val itemsBean = itemList[position]
+             val textSliderView = TextSliderView(context)
+             textSliderView.image(itemsBean.data?.cover?.homepage)
+             textSliderView.description(itemsBean.data?.title)
+             textSliderView.setOnSliderClickListener {
+                 //TODO to detail activity
+                 *//*  val intent = Intent(context, NewsDetailActivity::class.java)
+                  intent.putExtra(Constant.URL, itemsBean.getHref())
+                  startActivity(intent)*//*
 
+            }
+            holder?.slider.addSlider(textSliderView)
 
-    fun addData(itemList: ArrayList<Item>) {
-        this.itemList.addAll(itemList)
-        notifyDataSetChanged()
-    }
-
-    override fun onBindViewHolder(holder: HomeViewHolder?, position: Int) {
+        } else {*/
         val itemdata = itemList[position]
-        Glide.with(context).load(itemdata.data?.cover?.homepage).centerCrop().into(holder?.ivCover)
+        holder as HomeViewHolder
         Glide.with(context).load(itemdata.data?.cover?.homepage).centerCrop().into(holder?.ivCover)
         holder?.tvTitle?.text = itemdata.data?.title
         holder?.tvTag?.text = durationFormat(itemdata.data?.duration)
@@ -34,14 +45,22 @@ class HomeItemAdapter(val context: Context, var itemList: ArrayList<Item>) : Rec
 
     }
 
-    override fun getItemCount(): Int {
-        return itemList?.size
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+
+        var view = LayoutInflater.from(context).inflate(R.layout.item_home_standard, parent, false)
+        return HomeViewHolder(view)
+
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeViewHolder {
-        var view: View = LayoutInflater.from(context).inflate(R.layout.item_home_standard, parent, false)
-        var holder = HomeViewHolder(view)
-        return holder
+
+    fun addData(itemList: ArrayList<Item>) {
+        this.itemList.addAll(itemList)
+        notifyDataSetChanged()
+    }
+
+
+    override fun getItemCount(): Int {
+        return itemList?.size
     }
 
 
@@ -52,5 +71,6 @@ class HomeItemAdapter(val context: Context, var itemList: ArrayList<Item>) : Rec
         val tvTag = itemView.findViewById(R.id.tv_tag) as TextView
         val tvTag2 = itemView.findViewById(R.id.tv_tag2) as TextView
     }
+
 
 }

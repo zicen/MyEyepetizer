@@ -52,15 +52,21 @@ class HomeFragment : BaseFragment(tabId = tabsId[0]) {
                             onLoadMore()
                         }
                     }
-                }
+               }
             }
         })
         //获取数据
+        getFirstHomeData()
+
+
+    }
+
+    private fun getFirstHomeData() {
         Network.service.getFirstHomeData(System.currentTimeMillis()).io_main()
                 .subscribe({ homeBean ->
                     Log.e(TAG, homeBean.toString())
                     val itemList = homeBean.issueList[0]?.itemList
-                    itemList?.removeAt(0)
+                    itemList.filter { (type) -> type == "banner2" }.forEach { item -> itemList.remove(item) }
                     adapter = HomeItemAdapter(context, itemList)
                     pullrecycler_home.adapter = adapter
                     nextPageUrl = homeBean.nextPageUrl
@@ -69,8 +75,6 @@ class HomeFragment : BaseFragment(tabId = tabsId[0]) {
                     error.printStackTrace()
                     showToast("网络错误" + error.toString())
                 })
-
-
     }
 
     fun onLoadMore() {
