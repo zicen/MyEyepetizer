@@ -1,9 +1,9 @@
-package com.xk.eyepetizer.net
+package com.zhenquan.myeyepetizer.net
 
-import com.xk.eyepetizer.mvp.model.bean.Category
-import com.xk.eyepetizer.mvp.model.bean.HomeBean
-import com.xk.eyepetizer.mvp.model.bean.HotCategory
-import com.xk.eyepetizer.mvp.model.bean.Issue
+import com.zhenquan.myeyepetizer.mvp.model.bean.Category
+import com.zhenquan.myeyepetizer.mvp.model.bean.HomeBean
+import com.zhenquan.myeyepetizer.mvp.model.bean.HotCategory
+import com.zhenquan.myeyepetizer.mvp.model.bean.Issue
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

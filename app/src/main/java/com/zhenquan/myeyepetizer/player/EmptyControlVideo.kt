@@ -1,4 +1,4 @@
-package com.xk.eyepetizer.player
+package com.zhenquan.myeyepetizer.player
 
 import android.content.Context
 import android.util.AttributeSet

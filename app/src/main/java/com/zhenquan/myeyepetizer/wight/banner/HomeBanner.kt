@@ -1,4 +1,4 @@
-package com.xk.eyepetizer.ui.view.home.banner
+package com.zhenquan.myeyepetizer.view.home.banner
 
 import android.content.Context
 import android.graphics.Color
@@ -9,10 +9,14 @@ import android.view.Gravity
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
-import com.xk.eyepetizer.mvp.model.bean.Item
-import com.xk.eyepetizer.ui.view.common.JumpShowTextView
-import com.xk.eyepetizer.util.DisplayManager
 import com.zhenquan.myeyepetizer.R
+import com.zhenquan.myeyepetizer.model.bean.Item
+import com.zhenquan.myeyepetizer.ui.view.common.JumpShowTextView
+import com.zhenquan.myeyepetizer.ui.view.home.banner.BannerAdapter
+import com.zhenquan.myeyepetizer.ui.view.home.banner.HomeBannerTransformer
+import com.zhenquan.myeyepetizer.ui.view.home.banner.Indicator
+import com.zhenquan.myeyepetizer.util.DisplayManager
+
 
 class HomeBanner : FrameLayout {
 

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
-
 import com.zhenquan.myeyepetizer.R
 import com.zhenquan.myeyepetizer.ui.base.BaseFragment
 import com.zhenquan.myeyepetizer.ui.base.currentFragment
@@ -51,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         val fragment = supportFragmentManager.findFragmentByTag(checkedId.toString())
         if (fragment == null) {
             when(checkedId){
-                R.id.rb_home -> beginTransaction.add(R.id.fl_content,HomeFragment(),checkedId.toString())
+                R.id.rb_home -> beginTransaction.add(R.id.fl_content, HomeFragment(),checkedId.toString())
                 R.id.rb_hot -> beginTransaction.add(R.id.fl_content,HotFragment(),checkedId.toString())
                 R.id.rb_category -> beginTransaction.add(R.id.fl_content,CategoryFragment(),checkedId.toString())
             }

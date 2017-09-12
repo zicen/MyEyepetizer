@@ -1,4 +1,4 @@
-package com.xk.eyepetizer.ui.view.common
+package com.zhenquan.myeyepetizer.ui.view.common
 
 import android.content.Context
 import android.graphics.Color

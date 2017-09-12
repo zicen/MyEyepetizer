@@ -1,7 +1,6 @@
 package com.zhenquan.myeyepetizer.net
 
 import android.util.Log
-import com.xk.eyepetizer.net.ApiService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

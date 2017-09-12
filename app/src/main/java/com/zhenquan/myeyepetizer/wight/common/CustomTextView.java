@@ -6,7 +6,7 @@ import android.support.annotation.DimenRes;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
-import com.xk.eyepetizer.util.DisplayManager;
+import com.zhenquan.myeyepetizer.util.DisplayManager;
 
 import java.util.ArrayList;
 

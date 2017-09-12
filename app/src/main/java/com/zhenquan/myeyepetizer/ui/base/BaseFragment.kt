@@ -19,4 +19,11 @@ abstract class BaseFragment(tabId:Int) :android.support.v4.app.Fragment(){
 
     }
 
+    open fun  setupToolbar(): Boolean{
+        if (tabId != currentFragment) {
+            return true
+        }
+        return false
+    }
+
 }

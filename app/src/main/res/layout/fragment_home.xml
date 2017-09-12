@@ -4,14 +4,11 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <!--<com.xk.eyepetizer.ui.view.home.PullRecyclerView
-        android:id="@+id/pullrecycler_home"
+   <com.zhenquan.myeyepetizer.ui.view.home.PullRecyclerView
+        android:id="@+id/rv_home"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.xk.eyepetizer.ui.view.home.PullRecyclerView>-->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/pullrecycler_home"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"></com.zhenquan.myeyepetizer.ui.view.home.PullRecyclerView>
+
 
 
 </LinearLayout>

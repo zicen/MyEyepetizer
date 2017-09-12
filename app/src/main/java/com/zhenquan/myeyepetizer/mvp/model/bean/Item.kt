@@ -1,8 +1,10 @@
-package com.xk.eyepetizer.mvp.model.bean
+package com.zhenquan.myeyepetizer.model.bean
 
 import java.io.Serializable
 
-
+/**
+ * Created by xuekai on 2017/8/20.
+ */
 data class Item(val type: String, val data: Data?, val tag: String) : Serializable {
 
     data class Data(val dataType: String, val text: String, val videoTitle: String, val id: Long, val title: String, val slogan: String?,

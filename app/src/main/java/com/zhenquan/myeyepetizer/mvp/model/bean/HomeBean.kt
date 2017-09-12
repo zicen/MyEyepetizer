@@ -1,6 +1,8 @@
-package com.xk.eyepetizer.mvp.model.bean
+package com.zhenquan.myeyepetizer.mvp.model.bean
 
-
+/**
+ * Created by xuekai on 2017/8/20.
+ */
 data class HomeBean(var issueList: ArrayList<Issue>, val nextPageUrl: String, val nextPublishTime: Long, val newestIssueType: String, val dialog: Any)
 
 

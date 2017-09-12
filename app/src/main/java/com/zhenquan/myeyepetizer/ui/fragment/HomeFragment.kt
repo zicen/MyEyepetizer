@@ -1,5 +1,6 @@
 package com.zhenquan.myeyepetizer.ui.fragment
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -8,24 +9,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer
+import com.xk.eyepetizer.ui.adapter.HomeAdapter
 import com.zhenquan.myeyepetizer.R
 import com.zhenquan.myeyepetizer.TAG
-import com.zhenquan.myeyepetizer.io_main
-import com.zhenquan.myeyepetizer.net.Network
+import com.zhenquan.myeyepetizer.model.bean.Item
+import com.zhenquan.myeyepetizer.mvp.contract.HomeContract
+import com.zhenquan.myeyepetizer.mvp.model.bean.HomeBean
+import com.zhenquan.myeyepetizer.mvp.presenter.HomePresenter
 import com.zhenquan.myeyepetizer.showToast
-import com.zhenquan.myeyepetizer.ui.adapter.HomeItemAdapter
 import com.zhenquan.myeyepetizer.ui.base.BaseFragment
 import com.zhenquan.myeyepetizer.ui.base.tabsId
+import com.zhenquan.myeyepetizer.ui.view.home.PullRecyclerView
+import com.zhenquan.myeyepetizer.ui.view.home.banner.HomeBannerItem
+import com.zhenquan.myeyepetizer.view.home.banner.HomeBanner
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
- * Created by zhenquan on 2017/9/8.
+ * Created by xuekai on 2017/8/21.
  */
-class HomeFragment : BaseFragment(tabId = tabsId[0]) {
+class HomeFragment : BaseFragment(tabId = tabsId[0]), HomeContract.IView {
 
-    var loadingMore: Boolean = false
-    var nextPageUrl: String? = null
-    var adapter: HomeItemAdapter? = null
+    val simpleDateFormat by lazy { SimpleDateFormat("- MMM. dd, 'Brunch' -", Locale.ENGLISH) }
+
+    val homeAdapter: HomeAdapter by lazy { HomeAdapter() }
+
+    var presenter: HomePresenter = HomePresenter(this)
+
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_home, null)
     }
@@ -33,65 +46,116 @@ class HomeFragment : BaseFragment(tabId = tabsId[0]) {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        presenter.requestFirstData()
     }
 
+    var loadingMore = false
     private fun initView() {
 
-        pullrecycler_home.layoutManager = LinearLayoutManager(context)
 
-        pullrecycler_home.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        activity.tv_bar_title?.typeface = Typeface.createFromAsset(activity?.assets, "fonts/Lobster-1.4.otf")
+        val paint = activity.tv_bar_title.paint
+        paint.isFakeBoldText = true
+
+
+        rv_home.adapter = homeAdapter
+        rv_home.layoutManager = LinearLayoutManager(activity)
+        rv_home.setOnRefreshListener(object : PullRecyclerView.OnRefreshListener {
+            override fun onRefresh() {
+                presenter.requestFirstData()
+            }
+        })
+
+        rv_home.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    val childCount = pullrecycler_home.childCount
-                    val itemCount = pullrecycler_home.layoutManager.itemCount
-                    val firstVisibleItem = (pullrecycler_home.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                    val childCount = rv_home.getChildCount()
+                    val itemCount = rv_home.layoutManager.getItemCount()
+                    val firstVisibleItem = (rv_home.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                     if (firstVisibleItem + childCount == itemCount) {
+                        Log.d(TAG, "到底了")
                         if (!loadingMore) {
                             loadingMore = true
                             onLoadMore()
                         }
                     }
-               }
+                }
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                setupToolbar()
             }
         })
-        //获取数据
-        getFirstHomeData()
-
-
     }
 
-    private fun getFirstHomeData() {
-        Network.service.getFirstHomeData(System.currentTimeMillis()).io_main()
-                .subscribe({ homeBean ->
-                    Log.e(TAG, homeBean.toString())
-                    val itemList = homeBean.issueList[0]?.itemList
-                    itemList.filter { (type) -> type == "banner2" }.forEach { item -> itemList.remove(item) }
-                    adapter = HomeItemAdapter(context, itemList)
-                    pullrecycler_home.adapter = adapter
-                    nextPageUrl = homeBean.nextPageUrl
 
-                }, { error ->
-                    error.printStackTrace()
-                    showToast("网络错误" + error.toString())
-                })
+    val linearLayoutManager by lazy {
+        rv_home.layoutManager as LinearLayoutManager
+    }
+
+    /**
+     * recyclerview滚动的时候会调用这里，在这里设置toolbar
+     */
+    override fun setupToolbar(): Boolean {
+        if (super.setupToolbar()) {
+            return true
+        }
+        val findFirstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPosition()
+        if (findFirstVisibleItemPosition == 0) {//设置为透明
+            activity.toolbar.setBackgroundColor(0x00000000)
+            activity.iv_search.setImageResource(R.mipmap.ic_action_search_white)
+            activity.tv_bar_title.text = ""
+
+        } else {
+            if (homeAdapter.itemList.size > 1) {
+
+                activity.toolbar.setBackgroundColor(0xddffffff.toInt())
+                activity.iv_search.setImageResource(R.mipmap.ic_action_search)
+                val itemList = homeAdapter.itemList
+                val item = itemList[findFirstVisibleItemPosition + homeAdapter.bannerItemListCount - 1]
+                if (item.type == "textHeader") {
+                    activity.tv_bar_title.text = item.data?.text
+                } else {
+                    activity.tv_bar_title.text = simpleDateFormat.format(item.data?.date)
+                }
+            }
+
+        }
+        return true
     }
 
     fun onLoadMore() {
-        nextPageUrl?.let {
-            Network.service.getMoreHomeData(it).io_main()
-                    .subscribe({ (issueList, nextPageUrl1) ->
-                        //过滤掉banner2item
-                        val newItemList = issueList[0].itemList
-                        newItemList?.removeAt(0)
-                        newItemList.filter { (type) -> type == "banner2" }.forEach { item -> newItemList.remove(item) }
-                        nextPageUrl = nextPageUrl1
-                        loadingMore = false
-                        adapter?.addData(newItemList)
-                    } ,{ error ->
-                        error.printStackTrace()
-                        showToast("网络错误" + error.toString())
-                    })
+        presenter.requestMoreData()
+    }
+
+
+    override fun setMoreData(itemList: ArrayList<Item>) {
+        loadingMore = false
+        homeAdapter.addData(itemList)
+    }
+
+    override fun setFirstData(homeBean: HomeBean) {
+        homeAdapter.setBannerSize(homeBean.issueList[0].count)
+        homeAdapter.itemList = homeBean.issueList[0].itemList
+        rv_home.hideLoading()
+    }
+
+    override fun onError() {
+        showToast("网络错误")
+        rv_home.hideLoading()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (rv_home.getChildAt(0) is HomeBanner) {
+            for (index in 0..(rv_home.getChildAt(0) as HomeBanner).viewPager.childCount - 1) {
+                val homeBannerItem = (rv_home.getChildAt(0) as HomeBanner).viewPager.getChildAt(index) as HomeBannerItem
+                if (homeBannerItem.isVideo) {
+                    homeBannerItem.setUpView()//重新设置视频
+                }
+            }
         }
     }
 
@@ -100,4 +164,8 @@ class HomeFragment : BaseFragment(tabId = tabsId[0]) {
         GSYVideoPlayer.releaseAllVideos()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 }
+

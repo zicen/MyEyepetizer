@@ -1,4 +1,4 @@
-package com.xk.eyepetizer.ui.view.home.banner
+package com.zhenquan.myeyepetizer.ui.view.home.banner
 
 import android.content.Context
 import android.util.AttributeSet
@@ -8,10 +8,10 @@ import android.widget.FrameLayout
 import com.bumptech.glide.Glide
 import com.shuyu.gsyvideoplayer.utils.GSYVideoType
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer
-import com.xk.eyepetizer.mvp.model.bean.Item
-import com.xk.eyepetizer.player.EmptyControlVideo
 import com.zhenquan.myeyepetizer.R
 import com.zhenquan.myeyepetizer.TAG
+import com.zhenquan.myeyepetizer.model.bean.Item
+import com.zhenquan.myeyepetizer.player.EmptyControlVideo
 import kotlinx.android.synthetic.main.item_home_banner.view.*
 
 

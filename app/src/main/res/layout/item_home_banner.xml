@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-   <com.xk.eyepetizer.player.EmptyControlVideo
+   <com.zhenquan.myeyepetizer.player.EmptyControlVideo
         android:id="@+id/videoView"
         android:background="@android:color/black"
         android:layout_width="match_parent"

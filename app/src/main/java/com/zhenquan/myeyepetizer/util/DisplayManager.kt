@@ -1,7 +1,9 @@
-package com.xk.eyepetizer.util
+package com.zhenquan.myeyepetizer.util
 
 import android.content.Context
 import android.util.DisplayMetrics
+import android.util.Log
+import com.zhenquan.myeyepetizer.TAG
 
 
 object DisplayManager {
@@ -38,7 +40,6 @@ object DisplayManager {
     fun getScreenHeight(): Int? {
         return screenHeight
     }
-
 
 
     /**
@@ -91,6 +92,10 @@ object DisplayManager {
      * @return
      */
     fun getRealHeight(px: Int, parentHeight: Float): Int? {
+        val screenHeight1 = getScreenHeight()
+        Log.e(TAG, "screenHeight1" + screenHeight1)
+        Log.e(TAG, "parentHeight" + parentHeight)
+
         return (px / parentHeight * getScreenHeight()!!).toInt()
     }
 

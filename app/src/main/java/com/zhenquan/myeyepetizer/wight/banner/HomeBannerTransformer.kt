@@ -1,11 +1,9 @@
-package com.xk.eyepetizer.ui.view.home.banner
+package com.zhenquan.myeyepetizer.ui.view.home.banner
 
 import android.support.v4.view.ViewPager
 import android.view.View
 
-/**
- * Created by xuekai on 2017/8/22.
- */
+
 class HomeBannerTransformer : ViewPager.PageTransformer {
     override fun transformPage(page: View?, position: Float) {
         val width: Int = page?.width!!

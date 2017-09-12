@@ -1,4 +1,4 @@
-package com.xk.eyepetizer.ui.view.home
+package com.zhenquan.myeyepetizer.ui.view.home
 
 import android.animation.Animator
 import android.animation.ValueAnimator
@@ -15,8 +15,8 @@ import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.RelativeLayout
-import com.xk.eyepetizer.ui.view.home.banner.HomeBanner
 import com.zhenquan.myeyepetizer.R
+import com.zhenquan.myeyepetizer.view.home.banner.HomeBanner
 
 class PullRecyclerView : RecyclerView {
     constructor(context: Context?) : this(context, null)
@@ -54,7 +54,7 @@ class PullRecyclerView : RecyclerView {
                 mLastMotionX = e.x
                 downY = e.y.toInt()
                 constDownY = e.y.toInt()
-                resume = false;
+                resume = false
             }
             MotionEvent.ACTION_MOVE -> {
                 // deltaY > 0 是向下运动,< 0是向上运动
@@ -62,7 +62,7 @@ class PullRecyclerView : RecyclerView {
                 deleaX = e.x.minus(mLastMotionX)
 
                 if (Math.abs(deleaX) > Math.abs(deltaY)) {
-                    resume = false;
+                    resume = false
                 } else {
                     //当前正处于滑动
                     if (!canScrollVertically(-1) && !willRefresh) {

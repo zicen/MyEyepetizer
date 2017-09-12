@@ -1,4 +1,4 @@
-package com.xk.eyepetizer.ui.view.common
+package com.zhenquan.myeyepetizer.ui.view.common
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -8,9 +8,9 @@ import android.view.View
 import android.widget.FrameLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.BitmapImageViewTarget
-import com.xk.eyepetizer.mvp.model.bean.Item
 import com.zhenquan.myeyepetizer.R
 import com.zhenquan.myeyepetizer.durationFormat
+import com.zhenquan.myeyepetizer.model.bean.Item
 import com.zhenquan.myeyepetizer.timePreFormat
 import kotlinx.android.synthetic.main.item_home_standard.view.*
 

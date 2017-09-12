@@ -1,10 +1,9 @@
-package com.xk.eyepetizer.ui.view.home.banner
+package com.zhenquan.myeyepetizer.ui.view.home.banner
 
 import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
-import com.xk.eyepetizer.mvp.model.bean.Item
-
+import com.zhenquan.myeyepetizer.model.bean.Item
 
 
 class BannerAdapter : PagerAdapter() {

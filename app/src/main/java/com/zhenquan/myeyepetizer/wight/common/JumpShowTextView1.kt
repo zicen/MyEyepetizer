@@ -1,4 +1,4 @@
-package com.xk.eyepetizer.ui.view.common
+package com.zhenquan.myeyepetizer.ui.view.common
 
 import android.content.Context
 import android.graphics.Canvas
@@ -8,8 +8,8 @@ import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
-import com.xk.eyepetizer.util.DisplayManager
 import com.zhenquan.myeyepetizer.io_main
+import com.zhenquan.myeyepetizer.util.DisplayManager
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit

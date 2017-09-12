@@ -1,13 +1,11 @@
-package com.xk.eyepetizer.ui.view.home.banner
+package com.zhenquan.myeyepetizer.ui.view.home.banner
 
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.view.View
 
-/**
- * Created by xuekai on 2017/8/21.
- */
+
 class Indicator(context: Context) : View(context) {
 
 
