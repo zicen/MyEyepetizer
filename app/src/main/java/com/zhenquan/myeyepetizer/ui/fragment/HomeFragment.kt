@@ -46,7 +46,7 @@ class HomeFragment : BaseFragment(tabId = tabsId[0]), HomeContract.IView {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        presenter.requestFirstData()
+        loadData()
     }
 
     var loadingMore = false
@@ -62,7 +62,7 @@ class HomeFragment : BaseFragment(tabId = tabsId[0]), HomeContract.IView {
         rv_home.layoutManager = LinearLayoutManager(activity)
         rv_home.setOnRefreshListener(object : PullRecyclerView.OnRefreshListener {
             override fun onRefresh() {
-                presenter.requestFirstData()
+                loadData()
             }
         })
 
@@ -88,6 +88,10 @@ class HomeFragment : BaseFragment(tabId = tabsId[0]), HomeContract.IView {
                 setupToolbar()
             }
         })
+    }
+
+    private fun loadData() {
+        presenter.requestFirstData()
     }
 
 

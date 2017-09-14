@@ -76,7 +76,7 @@ class PullRecyclerView : RecyclerView {
             }
 
         }
-        return resume;
+        return resume
     }
 
     override fun onTouchEvent(e: MotionEvent?): Boolean {

@@ -4,6 +4,8 @@ import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
 import com.zhenquan.myeyepetizer.model.bean.Item
+import com.zhenquan.myeyepetizer.toActivityWithSerializable
+import com.zhenquan.myeyepetizer.ui.activity.DetailActivity
 
 
 class BannerAdapter : PagerAdapter() {
@@ -38,7 +40,7 @@ class BannerAdapter : PagerAdapter() {
         val view = viewList[position]
         container.addView(view)
         viewList[position].play()
-        view.setOnClickListener { v->/*v.context.toActivityWithSerializable<DetailActivity>(datas!![position])*/ }
+        view.setOnClickListener { v->v.context.toActivityWithSerializable<DetailActivity>(datas!![position])}
         return view
     }
 
